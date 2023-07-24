@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 //start express server
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 //start mongoose server
 mongoose.connect(
   process.env.MONGO_URL ||
