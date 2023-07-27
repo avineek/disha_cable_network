@@ -2,7 +2,6 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 
 //start express server
 const app = express();
@@ -27,11 +26,6 @@ const transactionRouter = require("./routers/transactions");
 //mention entities path to listen
 app.use("/users", userRouter);
 app.use("/transactions", transactionRouter);
-app.use(
-  cors({
-    origin: "*",
-  })
-);
 //listen to the port
 app.listen(PORT, () => {
   console.log("Server started");

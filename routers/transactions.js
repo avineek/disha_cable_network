@@ -1,10 +1,11 @@
 //import libraries
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
 //handle shcema
 const Transaction = require("../models/transaction");
 
-router.get("/", async (req, res) => {
+router.get("/", cors(), async (req, res) => {
   try {
     const transactions = await Transaction.find();
     res.json(transactions);
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", cors(), async (req, res) => {
   try {
     const transactions = await Transaction.findById(req.params.id);
     res.json(transactions);
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", cors(), async (req, res) => {
   const transactions = new Transaction({
     name: req.body.name,
     boxId: req.body.boxId,
@@ -38,7 +39,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", cors(), async (req, res) => {
   try {
     const transactions = await Transaction.findById(req.params.id);
     req.body.name ? (transactions.name = req.body.name) : null;
@@ -55,7 +56,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", cors(), async (req, res) => {
   try {
     const transactions = await Transaction.deleteOne({ _id: req.params.id });
     res.sendStatus(204).json({

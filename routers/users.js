@@ -1,10 +1,11 @@
 //import libraries
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
 //handle shcema
 const User = require("../models/user");
 
-router.get("/", async (req, res) => {
+router.get("/", cors(), async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", cors(), async (req, res) => {
   try {
     const users = await User.findById(req.params.id);
     res.json(users);
@@ -22,7 +23,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", cors(), async (req, res) => {
   const user = new User({
     name: req.body.name,
     boxId: req.body.boxId,
@@ -40,7 +41,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", cors(), async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     req.body.name ? (user.name = req.body.name) : null;
@@ -59,7 +60,7 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", cors(), async (req, res) => {
   try {
     const user = await User.deleteOne({ _id: req.params.id });
     res.sendStatus(204).json({
