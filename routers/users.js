@@ -24,6 +24,7 @@ router.get("/:id", cors(), async (req, res) => {
 });
 
 router.post("/", cors(), async (req, res) => {
+  console.log(req.body);
   const user = new User({
     name: req.body.name,
     boxId: req.body.boxId,
